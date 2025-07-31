@@ -1,15 +1,18 @@
 const envelope = document.getElementById("envelope");
-const openButton = document.getElementById("openButton");
-const closeButton = document.getElementById("closeButton");
+const openBtn  = document.getElementById("openButton");
+const closeBtn = document.getElementById("closeButton");
 
-openButton.addEventListener("click", () => {
-    envelope.classList.add("open");
-    openButton.style.display = "none";
-    closeButton.style.display = "inline-block";
+// Ao clicar em "Abrir Carta"
+openBtn.addEventListener("click", () => {
+  envelope.classList.add("open");   // dispara animação
+  openBtn.classList.add("hidden");  // esconde botão abrir
+  closeBtn.classList.remove("hidden"); // mostra botão fechar
 });
 
-closeButton.addEventListener("click", () => {
-    envelope.classList.remove("open");
-    closeButton.style.display = "none";
-    openButton.style.display = "inline-block";
+// Ao clicar em "Fechar Carta"
+closeBtn.addEventListener("click", () => {
+  envelope.classList.remove("open");  // fecha flap e esconde carta
+  closeBtn.classList.add("hidden");   // esconde botão fechar
+  openBtn.classList.remove("hidden"); // mostra botão abrir de novo
 });
+

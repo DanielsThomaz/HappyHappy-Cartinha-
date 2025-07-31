@@ -2,31 +2,42 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feliz Aniversário</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Envelope Animado</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 <div class="container">
     <div class="envelope" id="envelope">
+            <div class="flap-top"></div>
+        <div class="flap-bottom"></div>
+            <div class="heart">❤</div>
+
+            <!-- novos triângulos -->
+            <div class="triangle triangle-left"></div>
+            <div class="triangle triangle-right"></div>
+
+            <div class="letter"> … </div>
+
+        <!-- !!! a carta precisa estar AQUI dentro do envelope !!! -->
         <div class="letter">
-            <p>Oi Angela,</p>
+            <p>Olá Vida tudo bem espero</p>
             <p>
-                Hoje é um dia especial, e eu quero te desejar um aniversário incrível!
-                Que seu novo ciclo seja cheio de paz, saúde, amor e muitos momentos bons.
+                Hoje é um dia especial, e eu quero-te desejar um aniversário incrível!<br/>
+                Que esse novo ciclo seja cheio de paz, saúde, amor e muitos momentos bons.
             </p>
-            <p>
-                <mark>Você tem se tornado alguém muito especial para mim. 💛</mark>
-            </p>
-            <p style="text-align: center;">
-                👉 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Retire sua surpresa nesse link 🎥</a>
+            <p><mark>Você tem se tornado alguém muito especial para mim. 💛</mark></p>
+            <p class="link">
+                👉 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                Retire sua surpresa nesse link 🎥
+            </a>
             </p>
         </div>
     </div>
 
     <div class="button-wrapper">
         <button id="openButton">Abrir Carta</button>
-        <button id="closeButton" style="display: none;">Fechar Carta</button>
+        <button id="closeButton" class="hidden">Fechar Carta</button>
     </div>
 </div>
 

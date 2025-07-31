@@ -1,129 +1,213 @@
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CORPO AMARELO VIBRANTE */
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #FFD966;
-    font-family: "Playwrite AU QLD", cursive;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  background-color: #FFD966;
+  font-family: "Playwrite AU NSW", cursive;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
+/* CENTRALIZA E LIMITA LARGURA */
 .container {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* BOTÕES */
+.button-wrapper {
+    margin-top: 24px;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-    max-width: 400px;
-    padding: 0 10px;
 }
 
-/* Envelope base */
+/* ENVELOPE (perspectiva para animação 3D) */
 .envelope {
-    position: relative;
-    width: 90%;
-    max-width: 320px;
-    height: 200px;
-    background: #FF7F6A;
-    border-radius: 5px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-    overflow: hidden;
+  perspective: 600px;
+  position: relative;
+  width: 130%;
+  max-width: 390px;
+  aspect-ratio: 16 / 9;
+  background: #FF7F6A;
+  border-radius: 6px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  overflow: visible;
+
+}
+/* triângulos verticais nas laterais do envelope */
+.triangle {
+  position: absolute;
+  top: 0;
+  width: 195px;       /* largura da base do triângulo */
+  height: 100%;      /* altura do envelope */
+  background-color: #ff7f6a; /* cor do flap ou envelope */
+  z-index: 7;        /* abaixo da flap-top mas acima da carta */
 }
 
-/* Abas diagonais do envelope */
-.envelope::before,
-.envelope::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
+/* triângulo apontando para dentro, à esquerda */
+.triangle-left {
+  left: 0;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
-/* Aba superior (triângulo invertido) */
-.envelope::before {
-    top: 0;
-    left: 0;
-    border-width: 0 160px 100px 160px;
-    border-color: transparent transparent #FF6B5A transparent;
+/* triângulo apontando para dentro, à direita */
+.triangle-right {
+  right: 0;
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
 }
 
-/* Aba inferior (triângulo para cima) */
-.envelope::after {
-    bottom: 0;
-    left: 0;
-    border-width: 100px 160px 0 160px;
-    border-color: #FF6B5A transparent transparent transparent;
+/* ABA TRIANGULAR (flap) */
+.flap-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 50%;
+  background: #FF6B5A;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 100%;   /* gira pela base */
+  transform-style: preserve-3d; /* mantém o filho (.heart) junto */
+  backface-visibility: visible; /* garante que o “back” apareça */
+  transition: transform 0.6s ease;
+  z-index: 7;
+}
+/* Posicionamento do selo dentro da aba */
+.flap-top .heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: #fff;
+  pointer-events: none;
+}
+.flap-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;               /* mesma altura da flap-top */
+  background: #FF6B5A;        /* tom do flap inferior */
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  z-index: 7;
 }
 
-/* Carta */
+/* SELINHO CENTRALIZADO */
+.heart {
+  position: absolute;    /* em relação a .envelope */
+  top: 50%;              /* metade da altura do envelope */
+  left: 50%;             /* metade da largura do envelope */
+  transform: translate(-50%, -50%);
+  z-index: 8;            /* acima das abas */
+  font-size: 2rem;       /* ajuste se quiser maior/menor */
+  color: #fff;           /* cor do coração */
+  pointer-events: none;  /* não atrapalha cliques */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* CARTA DENTRO DO ENVELOPE */
 .letter {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-height: 250px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    padding: 15px;
-    font-size: 14px;
-    text-align: center;
-    overflow-y: auto;
-    transition: top 0.6s ease;
-    z-index: 2; /* Fica sobre as abas */
+  position: absolute;
+  top: 10%;    /* começa escondida abaixo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 89%;
+  max-height: 100%;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-size: 14px;
+  text-align: center;
+  overflow-y: auto;
+  transition: top 0.6s ease;
+  z-index: 6;
 }
 
-/* Quando envelope abre */
-.envelope.open .letter {
-    top: -40px; /* Sobe parcialmente */
-}
-
-/* Texto destacado */
+/* MARCAÇÃO & LINK */
 .letter mark {
-    background-color: #FFF2B2;
-    padding: 2px 4px;
-    border-radius: 3px;
+  background-color: #FFF2B2;
+  padding: 2px 4px;
+  border-radius: 3px;
 }
-
-/* Link */
 .letter a {
-    color: #3B3BFF;
-    font-weight: bold;
-    text-decoration: none;
+  color: #3B3BFF;
+  font-weight: bold;
+  text-decoration: none;
+
 }
 .letter a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+/* Keyframes para a carta ‘saltar’ e depois assentar */
+@keyframes letter-drop {
+  0%   { top: 80%; transform: translateX(-50%); }
+  60%  { top: 5%;  transform: translateX(-50%); }
+  80%  { top: 25%; transform: translateX(-50%); }
+  100% { top: 20%; transform: translateX(-50%); }
 }
 
-/* Botões */
-.button-wrapper {
-    margin-top: 30px;
+/* Se você ainda usar letter-rise, ajuste assim: */
+@keyframes letter-rise {
+  /* 0%: carta começa no meio (fechada) */
+  0%   { top: 60%; transform: translate(-50%, 0); }
+
+  /* 100%: carta sobe para fora, acima do envelope */
+  100% { top: -10%; transform: translate(-50%, 0); }
+}
+
+/* E na regra de abertura, aplique o letter-drop: */
+.envelope.open .letter {
+  animation: letter-drop 0.8s ease-out forwards;
+  z-index: 4;
+}
+
+/* Quando abrir, rotaciona a aba e dispara a animação da carta */
+.envelope.open .flap-top{
+    /* primeiro gira pra trás (-180°) e depois desloca pra cima (-100% da própria altura) */
+    transform: translateY(-197%) rotateX(180deg);
+    z-index: 9;
+}
+
+.envelope.open .letter {
+  animation: letter-rise 0.6s ease-out forwards;
+  z-index: 9;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #FF7F6A;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  background-color: #FF7F6A;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
 }
-
 button:hover {
-    background-color: #f06c64;
+  background-color: #f06c64;
 }
 
-/* Ajuste extra para telas menores que 375px */
-@media (max-width: 375px) {
-    .envelope {
-        height: 180px;
-    }
-    .letter {
-        font-size: 13px;
-        padding: 12px;
-    }
+/* AJUSTE PARA TELAS MUITO ESTREITAS */
+@media (max-width: 414px) {
+  .flap .heart {
+    font-size: 1.6rem;
+  }
+  .letter {
+    font-size: 13px;
+    padding: 12px;
+  }
 }
