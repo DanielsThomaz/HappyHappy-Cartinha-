@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFD966;
+    font-family: "Playwrite AU QLD", cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 10px;
+}
+
+/* Envelope base */
+.envelope {
+    position: relative;
+    width: 90%;
+    max-width: 320px;
+    height: 200px;
+    background: #FF7F6A;
+    border-radius: 5px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* Abas diagonais do envelope */
+.envelope::before,
+.envelope::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+/* Aba superior (triângulo invertido) */
+.envelope::before {
+    top: 0;
+    left: 0;
+    border-width: 0 160px 100px 160px;
+    border-color: transparent transparent #FF6B5A transparent;
+}
+
+/* Aba inferior (triângulo para cima) */
+.envelope::after {
+    bottom: 0;
+    left: 0;
+    border-width: 100px 160px 0 160px;
+    border-color: #FF6B5A transparent transparent transparent;
+}
+
+/* Carta */
+.letter {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-height: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    font-size: 14px;
+    text-align: center;
+    overflow-y: auto;
+    transition: top 0.6s ease;
+    z-index: 2; /* Fica sobre as abas */
+}
+
+/* Quando envelope abre */
+.envelope.open .letter {
+    top: -40px; /* Sobe parcialmente */
+}
+
+/* Texto destacado */
+.letter mark {
+    background-color: #FFF2B2;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Link */
+.letter a {
+    color: #3B3BFF;
+    font-weight: bold;
+    text-decoration: none;
+}
+.letter a:hover {
+    text-decoration: underline;
+}
+
+/* Botões */
+.button-wrapper {
+    margin-top: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #FF7F6A;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #f06c64;
+}
+
+/* Ajuste extra para telas menores que 375px */
+@media (max-width: 375px) {
+    .envelope {
+        height: 180px;
+    }
+    .letter {
+        font-size: 13px;
+        padding: 12px;
+    }
+}
