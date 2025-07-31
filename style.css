@@ -51,7 +51,7 @@ body {
 .triangle {
   position: absolute;
   top: 0;
-  width: 195px;       /* largura da base do triângulo */
+  width: 175px;       /* largura da base do triângulo */
   height: 100%;      /* altura do envelope */
   background-color: #ff7f6a; /* cor do flap ou envelope */
   z-index: 7;        /* abaixo da flap-top mas acima da carta */
